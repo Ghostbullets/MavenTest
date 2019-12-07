@@ -1,0 +1,107 @@
+WheelView可设置xml属性------------------
+	    app:wheelView_textColorOut=""           不在中间的文本颜色
+            app:wheelView_textColorCenter=""        中间的文本颜色
+            app:wheelView_textSize=""               文本颜色   
+            app:wheelView_dividerColor=""           分割线颜色
+            app:wheelView_gravity=""                文本位置，有居中、朝左、朝右3种
+            app:wheelView_lineSpacingMultiplier=""  条目间距倍数，文本高度*条目间距倍数=每行高度
+
+
+WheelView公共方法-----------------------
+void setCurrentItem(int currentItem)          设置当前选中项位置
+void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener)设置滚轮滚动后选中item监听
+boolean isLoop()                              是否循环滚动
+boolean isScroll()                            是否处于滚动状态
+void setWheelSpec(WheelSpec.Builder builder)  设置滚轮配置
+WheelSpec.Builder getWheelSpecBuilder()       获取滚轮配置
+
+
+WheelView可设置WheelSpec属性---------------------
+isLoop(boolean)                是否循环，默认true
+isOptions(boolean)             是否是选项，默认false
+isCenterLabel(boolean)         是否只显示选中项的label  默认true
+isSelfTextSize(boolean)        文字长度过长而导致绘制超过WheelView的宽度时，是否自适应文字大小,默认false
+dividerType(boolean)           分割线类型,有WheelSpec.DividerType.FILL,WheelSpec.DividerType.WRAP 两种,默认FILL
+dividerColor(@ColorInt int)    分割线颜色，需传入@ColorInt，默认0xFFD5D5D5
+gravity(Gravity gravity)       文本位置，有居中Gravity.CENTER、朝左Gravity.START、朝右Gravity.END3种，默认Gravity.CENTER
+label(String)                  附加单位,标注
+textSize(int)                  选项的文字大小,单位sp
+textXOffset(int)               文本水平方向偏移量
+typeface(Typeface)             字体样式，例如android.graphics.Typeface,默认是等宽字体Typeface.MONOSPACE
+textColorOut(@ColorInt int)    周围文字颜色
+textColorCenter(@ColorInt int) 中心文字颜色
+lineSpacingMultiplier(float)   条目间距倍数，文本高度*条目间距倍数=每行高度,该值默认1.6F
+setCurrentItem(int)            设置初始选中位置
+
+
+TimePicker时间选择器-----------------默认布局R.layout.picker_view_time
+//动态设置标题
+void setTitleText(String)
+//设置默认选中时间
+TimePicker setCurrentDates(Integer year, Integer month, Integer day)
+TimePicker setCurrentDates(Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer second)
+//主动调用选中监听回调
+void optionSelect()
+
+
+OptionsPicker选项选择器--------------默认布局R.layout.picker_view_options
+//动态设置标题
+void setTitleText(String)
+//设置默认选中项
+OptionsPicker setSelectOptions(int)
+OptionsPicker setSelectOptions(int option1, int option2)
+OptionsPicker setSelectOptions(int option1, int option2, int option3)
+//设置联动数据，并初始化
+OptionsPicker setPicker(List<T> optionsItems)
+OptionsPicker setPicker(List<T> options1Items, List<List<T>> options2Items)
+OptionsPicker setPicker(List<T> options1Items, List<List<T>> options2Items, List<List<List<T>>> options3Items)
+//设置不联动数据，并初始化
+OptionsPicker setNPicker(List<T> options1Items, List<T> options2Items, List<T> options3Items)
+//主动调用选中监听回调
+void optionSelect()
+
+
+PickerConfig.Builder-----------------选择器配置
+optionsSelectListener(OnOptionsSelectListener)选项选择监听，点击确定按钮调用timeSelectListener(OnTimeSelectListener)时间选择监听，点击确定按钮调用timeSelectChangeListener(OnTimeSelectChangeListener)时间改变监听optionsSelectChangeListener(OnOptionsSelectChangeListener)选项改变监听customListener(OnCustomListener)定制布局处理监听，需自行实现布局初始化cancelListener(View.OnClickListener)取消按钮监听isRestoreItem(boolean)联动切换时，是否将联动项重置为第一项setCurrentItemtimeDisplayType(boolean[])   时间选择器显示类型，默认显示： 年月日， 不显示时分秒currentDate(Calendar currentDate)     设置当前选中时间
+setRangDate(Calendar startDate, Calendar endDate)  设置选中开始、结束区间
+setRangYear(int startYear, int endYear) 设置选中开始、结束年份区间
+isLunarCalendar(boolean)是否显示农历(暂无功能)
+pickerType(@PickerConfig.PickerType int val)TYPE_PICKER_OPTIONS选项选择器, PickerType.TYPE_PICKER_TIME时间选择器
+layoutRes(int)  设置布局，默认有R.layout.picker_view_options、R.layout.picker_view_time，自定义可设置样式(id要参照默认)
+decorView(ViewGroup decorView)设置选择器将添加到decorView容器里面
+textContentConfirm(String) 确定按钮文字
+textContentCancel(String)  取消按钮文字
+textContentTitle(String)   中间标题文字
+textColorConfirm(@ColorInt int)确定按钮颜色
+textColorCancel(@ColorInt int)取消按钮颜色
+textColorTitle(@ColorInt int)中间标题颜色
+bgColorWheel(@ColorInt int)滚轮背景颜色
+bgColorTitle(@ColorInt int)标题背景颜色
+textSizeSubmitCancel(@IntRange(from = 10) int)确定取消按钮大小
+textSizeTitle(@IntRange(from = 10) int)标题文字大小
+outSideColor(@ColorInt int)选择器背景色颜色,默认是灰色
+isDialog(boolean)是否是弹窗模式，默认false
+cancelable(boolean val)是否能点击返回键、点击弹窗外部取消弹窗
+configSpec(PickerConfigSpec)设置选择器配置规范
+spec(WheelSpec.Builder)设置滚轮配置属性
+
+
+PickerConfigSpec---------------------选择器配置说明,通常普通选择器只用到前3个，时间选择器最多用到6个
+//设置滚轮配置属性
+setWheelSpec(WheelSpec.Builder builder)
+//设置第一二三级选项的单位
+labels(String label1, String label2, String label3)
+//设置时间选择器单位
+labels(String label1, String label2, String label3, String label4, String label5, String label6)
+//设置一二三级选项的选中
+setCurrentItems(int option1, int option2, int option3)
+//设置时间选择器的选中
+setCurrentItems(int option1, int option2, int option3, int option4, int option5, int option6)
+// 分别设置第一二三级是否循环滚动
+cyclics(boolean cyclic1, boolean cyclic2, boolean cyclic3)
+// 分别设置时间选择器是否循环滚动
+cyclics(boolean cyclic1, boolean cyclic2, boolean cyclic3, boolean cyclic4, boolean cyclic5, boolean cyclic6)
+//分别设置第一二三级的x轴偏移量
+textXOffset(int x_offset_one, int x_offset_two, int x_offset_three)
+//分别设置时间选择器的x轴偏移量
+textXOffset(int x_offset_one, int x_offset_two, int x_offset_three, int x_offset_four, int x_offset_five, int x_offset_six)
