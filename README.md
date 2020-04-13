@@ -66,7 +66,7 @@ dependencies {
         FileUtil.init();
 ```
 
-## 3、详细使用
-    请参考banner依赖库使用.txt  
-    selector依赖库使用
-    wheelview跟pickerview依赖库使用教程
+## 3、详细使用请参考
+    banner依赖库使用.txt  
+    selector依赖库使用.txt
+    wheelview跟pickerview依赖库使用教程.txt
