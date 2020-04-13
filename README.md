@@ -55,9 +55,9 @@ dependencies {
      //轮播图
      implementation com.base.banner.banner-androidx:1.0.0
 }
+```
 
-
-4.在Application中进行初始化
+3.在Application中进行初始化
 
 ```
         //基础功能库
