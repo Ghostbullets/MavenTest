@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 
-3.在Application中进行初始化
+3.使用
 
 ```
 /**
@@ -116,12 +116,3 @@ dependencies {
         }
        
 ```
-
-## 3、详细使用请参考
-    banner依赖库使用.txt  
-    selector依赖库使用.txt
-    wheelview跟pickerview依赖库使用教程.txt
-    ipc依赖库使用.md
-    bindingadapter依赖库使用.md
-
- 
