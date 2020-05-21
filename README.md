@@ -39,6 +39,11 @@ dependencies {
      
      //轮播图
      implementation 'com.base.banner:banner:1.0.1'
+     //WebView独立进程解决方案
+     //参考https://github.com/xudjx/webprogress
+     implementation 'com.cjf.ipc:ipc:1.0.0'
+     //适合mvvm 框架使用的listview、recyclerview、viewpager适配器
+     implementation 'com.cjf.bindingadapter:bindingadapter:1.0.0'
      
 
      //如果你升级到androidx，请使用下面依赖
@@ -70,3 +75,5 @@ dependencies {
     banner依赖库使用.txt  
     selector依赖库使用.txt
     wheelview跟pickerview依赖库使用教程.txt
+    ipc依赖库使用.md
+    bindingadapter依赖库使用.md
