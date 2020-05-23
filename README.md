@@ -39,12 +39,20 @@ dependencies {
      
      //轮播图
      implementation 'com.base.banner:banner:1.0.1'
+     
      //WebView独立进程解决方案
      //参考https://github.com/xudjx/webprogress
      implementation 'com.cjf.ipc:ipc:1.0.0'
+     
      //适合mvvm 框架使用的listview、recyclerview、viewpager适配器
+     //参考https://github.com/evant/binding-collection-adapter
      implementation 'com.cjf.bindingadapter:bindingadapter:1.0.0'
      
+     //基于MVVM框架的基础库(待后续完善)(PS:默认api了下面的网络库)
+     implementation "com.cjf.base:base:0.1.0"
+     
+      //基于MVVM框架的网络库(待后续完善)
+     implementation "com.cjf.network:network:0.1.0"
 
      //如果你升级到androidx，请使用下面依赖
       //基本功能依赖库
