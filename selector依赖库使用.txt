@@ -1,20 +1,62 @@
-Ê¹ÓÃÊ¾Àı
+# MavenTest
+selectorä¾èµ–åº“
+
+## 1ã€æ¼”ç¤ºï¼ˆè¯·staræ”¯æŒï¼‰
+
+## 2ã€å¦‚ä½•ä½¿ç”¨
+ç›®å‰æ”¯æŒä¸»æµå¼€å‘å·¥å…·AndroidStudioçš„ä½¿ç”¨ï¼Œç›´æ¥é…ç½®build.gradleï¼Œå¢åŠ ä¾èµ–å³å¯.
+
+### 2.1ã€Android Studioå¯¼å…¥æ–¹æ³•ï¼Œæ·»åŠ Gradleä¾èµ–
+
+1.å…ˆåœ¨é¡¹ç›®æ ¹ç›®å½•çš„ build.gradle çš„ repositories æ·»åŠ :
+```
+allprojects {
+    repositories {
+        ...
+        maven { url "https://jitpack.io" }
+        maven { url 'https://raw.githubusercontent.com/Ghostbullets/MavenTest/master' }
+    }
+}
+```
+
+2.åœ¨é¡¹ç›®çš„ build.gradle ä¸­å¢åŠ ä¾èµ–å¹¶å¼•ç”¨
+
+```
+dependencies {
+    Â·Â·Â·
+     //æ·»åŠ ä¾èµ–
+     //æ»šè½®ï¼Œéœ€é…å¥—wheelviewä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥åªå†™pickerview(å†…éƒ¨å·²ä¾èµ–wheelview)
+     implementation 'com.base.wheelview:wheelview:1.0.1'
+     implementation 'com.base.pickerview:pickerview:1.0.1'
+     
+     //androidx
+     //æ»šè½®ï¼Œéœ€é…å¥—wheelview-androidxä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥åªå†™pickerview(å†…éƒ¨å·²ä¾èµ–wheelview)
+     implementation 'com.base.wheelview:wheelview-androidx:1.0.1'
+     implementation 'com.base.pickerview:pickerview-androidx1.0.1'
+    Â·Â·Â·
+}
+```
+
+3.ä½¿ç”¨
+
+```
+ä½¿ç”¨ç¤ºä¾‹
 MediaAction.from(Activity activity)
-                    .choose(new MimeType(MimeType.GetType.IMAGE))//Ñ¡ÔñÃ½ÌåÎÄ¼şÀàĞÍ
-                    .countable(true)//ÊÇ·ñÏÔÊ¾×Ô¶¯Ìí¼ÓµÄÊı×Ö»òÕß¸´Ñ¡±ê¼Ç
-                    .spanCount(4)//Ò»ĞĞÏÔÊ¾¼¸ÕÅÍ¼
-                    .imageEngine(new GlideEngine())//Ê¹ÓÃÄÄÖÖÍ¼Æ¬¼ÓÔØÆ÷
-                    .maxSelectable(8)//×î¶à¿ÉÑ¡ÔñµÄÊı
-                    .originalEnable(false)//ÊÇ·ñÊ¹ÓÃÔ­Í¼(ÔİÊ±Ã»ÓÃ)
+                    .choose(new MimeType(MimeType.GetType.IMAGE))//é€‰æ‹©åª’ä½“æ–‡ä»¶ç±»å‹
+                    .countable(true)//æ˜¯å¦æ˜¾ç¤ºè‡ªåŠ¨æ·»åŠ çš„æ•°å­—æˆ–è€…å¤é€‰æ ‡è®°
+                    .spanCount(4)//ä¸€è¡Œæ˜¾ç¤ºå‡ å¼ å›¾
+                    .imageEngine(new GlideEngine())//ä½¿ç”¨å“ªç§å›¾ç‰‡åŠ è½½å™¨
+                    .maxSelectable(8)//æœ€å¤šå¯é€‰æ‹©çš„æ•°
+                    .originalEnable(false)//æ˜¯å¦ä½¿ç”¨åŸå›¾(æš‚æ—¶æ²¡ç”¨)
                     .setOnSelectedListener(new OnSelectedListener() {
                         @Override
                         public void onSelected(@NonNull List<Uri> uriList, @NonNull List<String> pathList) {
 
                         }
                     })
-                    .setSelectMediaPaths(list)//´«ÈëÑ¡ÖĞÎÄ¼şÂ·¾¶¼¯ºÏ
-                    // .setSelectMediaUris()//´«ÈëÑ¡ÖĞÎÄ¼şUrl¼¯ºÏ
-                    .forResult(5);//¿ªÊ¼Ñ¡ÔñÃ½ÌåµÈ´ı½á¹û
+                    .setSelectMediaPaths(list)//ä¼ å…¥é€‰ä¸­æ–‡ä»¶è·¯å¾„é›†åˆ
+                    // .setSelectMediaUris()//ä¼ å…¥é€‰ä¸­æ–‡ä»¶Urlé›†åˆ
+                    .forResult(5);//å¼€å§‹é€‰æ‹©åª’ä½“ç­‰å¾…ç»“æœ
   @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -27,54 +69,56 @@ MediaAction.from(Activity activity)
     }
 
 
-MediaActionÀà·½·¨½²½â
-//´ÓÒ³ÃæÆô¶¯Ñ¡ÔñÆ÷
+MediaActionç±»æ–¹æ³•è®²è§£
+//ä»é¡µé¢å¯åŠ¨é€‰æ‹©å™¨
 from(Activity activity)
-//´ÓËéÆ¬Æô¶¯Ñ¡ÔñÆ÷
+//ä»ç¢ç‰‡å¯åŠ¨é€‰æ‹©å™¨
 from(Fragment fragment)
-//ÔÚÆô¶¯µÄ»î¶¯»òÆ¬¶ÎÖĞ»ñÈ¡ÓÃ»§Ñ¡ÔñµÄÃ½ÌåµÄ{@link Uri}ÁĞ±í
+//åœ¨å¯åŠ¨çš„æ´»åŠ¨æˆ–ç‰‡æ®µä¸­è·å–ç”¨æˆ·é€‰æ‹©çš„åª’ä½“çš„{@link Uri}åˆ—è¡¨
 List<Uri> obtainResult(Intent data)
-//»ñÈ¡Æô¶¯µÄ»î¶¯»òÆ¬¶ÎÖĞÓÃ»§Ñ¡ÔñµÄÃ½ÌåÂ·¾¶ÁĞ±í
+//è·å–å¯åŠ¨çš„æ´»åŠ¨æˆ–ç‰‡æ®µä¸­ç”¨æˆ·é€‰æ‹©çš„åª’ä½“è·¯å¾„åˆ—è¡¨
 List<String> obtainPathResult(Intent data)
-//»ñÈ¡ÓÃ»§ÊÇ·ñ¾ö¶¨Ê¹ÓÃÔ­Í¼
+//è·å–ç”¨æˆ·æ˜¯å¦å†³å®šä½¿ç”¨åŸå›¾
 boolean obtainOriginalState(Intent data)
-//Ñ¡ÔñÃ½ÌåÎÄ¼şÀàĞÍ
+//é€‰æ‹©åª’ä½“æ–‡ä»¶ç±»å‹
 SelectionCreator choose(MimeType mimeType)
 
-SelectionCreatorÀà·½·¨½²½â
-//Èç¹ûÖ»Ñ¡ÔñÍ¼Ïñ»òÊÓÆµ×÷ÎªÃ½Ìå£¬ÊÇ·ñÖ»ÏÔÊ¾Ò»ÖÖÃ½ÌåÀàĞÍ¡£(ÔİÎŞÓÃ)
+SelectionCreatorç±»æ–¹æ³•è®²è§£
+//å¦‚æœåªé€‰æ‹©å›¾åƒæˆ–è§†é¢‘ä½œä¸ºåª’ä½“ï¼Œæ˜¯å¦åªæ˜¾ç¤ºä¸€ç§åª’ä½“ç±»å‹ã€‚(æš‚æ— ç”¨)
 showSingleMediaType(boolean showSingleMediaType)
-//ÊÇ·ñÏÔÊ¾×Ô¶¯Ìí¼ÓµÄÊı×Ö»òÕß¸´Ñ¡±ê¼Ç
+//æ˜¯å¦æ˜¾ç¤ºè‡ªåŠ¨æ·»åŠ çš„æ•°å­—æˆ–è€…å¤é€‰æ ‡è®°
 countable(boolean countable)
-//×î¶à¿ÉÑ¡ÔñµÄÊı
+//æœ€å¤šå¯é€‰æ‹©çš„æ•°
 maxSelectable(int maxSelectable)
-ÎªÍ¼ÏñºÍÊÓÆµÃ½ÌåÀàĞÍÑ¡ÔñÎÄ¼ş¡£(ÔİÎŞÓÃ)
+ä¸ºå›¾åƒå’Œè§†é¢‘åª’ä½“ç±»å‹é€‰æ‹©æ–‡ä»¶ã€‚(æš‚æ— ç”¨)
 maxSelectablePerMediaType(int maxImageSelectable, int maxVideoSelectable)
-//ÊÇ·ñÔÚÃ½ÌåÍø¸ñÊÓÍ¼ÉÏÆôÓÃÁËÅÄÕÕ¹¦ÄÜ¡£(¹¦ÄÜÔİÎ´ÊµÏÖ)
+//æ˜¯å¦åœ¨åª’ä½“ç½‘æ ¼è§†å›¾ä¸Šå¯ç”¨äº†æ‹ç…§åŠŸèƒ½ã€‚(åŠŸèƒ½æš‚æœªå®ç°)
 capture(boolean enable)
-//ÊÇ·ñÊ¹ÓÃÔ­Í¼
+//æ˜¯å¦ä½¿ç”¨åŸå›¾
 originalEnable(boolean enable)
-//×î´óÔ­Ê¼´óĞ¡£¬µ¥Î»ÎªMB£¬²»¿ÉÑ¡Ôñ³¬¹ı¸Ã´óĞ¡µÄ¶àÃ½ÌåÎÄ¼ş£¬Ê¹ÓÃÔ­Í¼Çé¿öÏÂÉúĞ§
+//æœ€å¤§åŸå§‹å¤§å°ï¼Œå•ä½ä¸ºMBï¼Œä¸å¯é€‰æ‹©è¶…è¿‡è¯¥å¤§å°çš„å¤šåª’ä½“æ–‡ä»¶ï¼Œä½¿ç”¨åŸå›¾æƒ…å†µä¸‹ç”Ÿæ•ˆ
 maxOriginalSize(int size)
-//ÉèÖÃ´Ë»î¶¯µÄÔ¤ÆÚ·½Ïò(ÔİÎŞÓÃ)
+//è®¾ç½®æ­¤æ´»åŠ¨çš„é¢„æœŸæ–¹å‘(æš‚æ— ç”¨)
 restrictOrientation(@ScreenOrientation int orientation)
-//Ò»ĞĞÏÔÊ¾¼¸ÕÅÍ¼
+//ä¸€è¡Œæ˜¾ç¤ºå‡ å¼ å›¾
 spanCount(int spanCount)
-//ÉèÖÃitem´óĞ¡£¬¿ØÖÆÒ»ĞĞÏÔÊ¾¸öÊı
+//è®¾ç½®itemå¤§å°ï¼Œæ§åˆ¶ä¸€è¡Œæ˜¾ç¤ºä¸ªæ•°
 gridExpectedSize(int size)
-//½«ÕÕÆ¬ËõÂÔÍ¼µÄ±ÈÀıÓëÊÓÍ¼µÄ´óĞ¡½øĞĞ±È½Ï¡£ËüÓ¦¸ÃÊÇÒ»¸ö¸¡µãÖµ(0.0£¬1.0)
+//å°†ç…§ç‰‡ç¼©ç•¥å›¾çš„æ¯”ä¾‹ä¸è§†å›¾çš„å¤§å°è¿›è¡Œæ¯”è¾ƒã€‚å®ƒåº”è¯¥æ˜¯ä¸€ä¸ªæµ®ç‚¹å€¼(0.0ï¼Œ1.0)
 thumbnailScale(@FloatRange(from = 0.0f, to = 1.0f) float scale)
-//ÉèÖÃÍ¼Æ¬¼ÓÔØÒıÇæ
+//è®¾ç½®å›¾ç‰‡åŠ è½½å¼•æ“
 imageEngine(ImageEngine imageEngine)
-//ÉèÖÃÕ¼Î»Í¼
+//è®¾ç½®å ä½å›¾
 placeholder(@DrawableRes int placeholder)
-//Ã½ÌåÎÄ¼şÑ¡ÖĞ¼àÌı
+//åª’ä½“æ–‡ä»¶é€‰ä¸­ç›‘å¬
 setOnSelectedListener(@Nullable OnSelectedListener listener)
-//µ±ÓÃ»§Ñ¡ÖĞ»òÈ¡ÏûÑ¡ÖĞÔ­Í¼Ê±£¬Á¢¼´½«ÕìÌıÆ÷ÉèÖÃÎª»Øµ÷¡£
+//å½“ç”¨æˆ·é€‰ä¸­æˆ–å–æ¶ˆé€‰ä¸­åŸå›¾æ—¶ï¼Œç«‹å³å°†ä¾¦å¬å™¨è®¾ç½®ä¸ºå›è°ƒã€‚
 setOnCheckedListener(@Nullable OnCheckedListener listener)
-//Ñ¡ÖĞÎÄ¼şÂ·¾¶¼¯ºÏ
+//é€‰ä¸­æ–‡ä»¶è·¯å¾„é›†åˆ
 setSelectMediaPaths(@Nullable ArrayList<String> selectMediaPaths)
-//Ñ¡ÖĞÎÄ¼şUri¼¯ºÏ
+//é€‰ä¸­æ–‡ä»¶Urié›†åˆ
 setSelectMediaUris(@Nullable ArrayList<Uri> selectMediaUris)
-¿ªÊ¼Ñ¡ÔñÃ½Ìå²¢µÈ´ı½á¹û¡£
+å¼€å§‹é€‰æ‹©åª’ä½“å¹¶ç­‰å¾…ç»“æœã€‚
 forResult(int requestCode)
+       
+```
