@@ -25,14 +25,16 @@ allprojects {
 dependencies {
     ···
      //添加依赖
-     //滚轮，需配套wheelview使用，也可以只写pickerview(内部已依赖wheelview)
-     implementation 'com.base.wheelview:wheelview:1.0.1'
-     implementation 'com.base.pickerview:pickerview:1.0.1'
+     //基本功能依赖库
+     implementation 'com.github.Ghostbullets:hykjBase:1.5.47'
+     //图片选择器，需配套使用hykjBase
+     implementation 'com.base.selector:selector:1.0.0'
      
-     //androidx
-     //滚轮，需配套wheelview-androidx使用，也可以只写pickerview(内部已依赖wheelview)
-     implementation 'com.base.wheelview:wheelview-androidx:1.0.1'
-     implementation 'com.base.pickerview:pickerview-androidx1.0.1'
+     //如果你升级到androidx，请使用下面依赖
+     //基本功能依赖库
+     implementation 'com.Ghostbullets.base:base-androidx:0.1.2'
+     //图片选择器，需配套base-androidx使用
+     implementation 'com.base.selector:selector-androidx1.0.1'
     ···
 }
 ```
