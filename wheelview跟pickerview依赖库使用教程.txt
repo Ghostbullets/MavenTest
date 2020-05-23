@@ -1,107 +1,152 @@
-WheelView¿ÉÉèÖÃxmlÊôĞÔ------------------
-	    app:wheelView_textColorOut=""           ²»ÔÚÖĞ¼äµÄÎÄ±¾ÑÕÉ«
-            app:wheelView_textColorCenter=""        ÖĞ¼äµÄÎÄ±¾ÑÕÉ«
-            app:wheelView_textSize=""               ÎÄ±¾ÑÕÉ«   
-            app:wheelView_dividerColor=""           ·Ö¸îÏßÑÕÉ«
-            app:wheelView_gravity=""                ÎÄ±¾Î»ÖÃ£¬ÓĞ¾ÓÖĞ¡¢³¯×ó¡¢³¯ÓÒ3ÖÖ
-            app:wheelView_lineSpacingMultiplier=""  ÌõÄ¿¼ä¾à±¶Êı£¬ÎÄ±¾¸ß¶È*ÌõÄ¿¼ä¾à±¶Êı=Ã¿ĞĞ¸ß¶È
+# MavenTest
+bannerä¾èµ–åº“
+
+## 1ã€æ¼”ç¤ºï¼ˆè¯·staræ”¯æŒï¼‰
+
+## 2ã€å¦‚ä½•ä½¿ç”¨
+ç›®å‰æ”¯æŒä¸»æµå¼€å‘å·¥å…·AndroidStudioçš„ä½¿ç”¨ï¼Œç›´æ¥é…ç½®build.gradleï¼Œå¢åŠ ä¾èµ–å³å¯.
+
+### 2.1ã€Android Studioå¯¼å…¥æ–¹æ³•ï¼Œæ·»åŠ Gradleä¾èµ–
+
+1.å…ˆåœ¨é¡¹ç›®æ ¹ç›®å½•çš„ build.gradle çš„ repositories æ·»åŠ :
+```
+allprojects {
+    repositories {
+        ...
+        maven { url "https://jitpack.io" }
+        maven { url 'https://raw.githubusercontent.com/Ghostbullets/MavenTest/master' }
+    }
+}
+```
+
+2.åœ¨é¡¹ç›®çš„ build.gradle ä¸­å¢åŠ ä¾èµ–å¹¶å¼•ç”¨
+
+```
+dependencies {
+    Â·Â·Â·
+     //æ·»åŠ ä¾èµ–
+     //æ»šè½®ï¼Œéœ€é…å¥—wheelviewä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥åªå†™pickerview(å†…éƒ¨å·²ä¾èµ–wheelview)
+     implementation 'com.base.wheelview:wheelview:1.0.1'
+     implementation 'com.base.pickerview:pickerview:1.0.1'
+     
+     //androidx
+     //æ»šè½®ï¼Œéœ€é…å¥—wheelview-androidxä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥åªå†™pickerview(å†…éƒ¨å·²ä¾èµ–wheelview)
+     implementation 'com.base.wheelview:wheelview-androidx:1.0.1'
+     implementation 'com.base.pickerview:pickerview-androidx1.0.1'
+    Â·Â·Â·
+}
+```
+
+3.ä½¿ç”¨
+
+```
+WheelViewå¯è®¾ç½®xmlå±æ€§------------------
+	    app:wheelView_textColorOut=""           ä¸åœ¨ä¸­é—´çš„æ–‡æœ¬é¢œè‰²
+            app:wheelView_textColorCenter=""        ä¸­é—´çš„æ–‡æœ¬é¢œè‰²
+            app:wheelView_textSize=""               æ–‡æœ¬é¢œè‰²   
+            app:wheelView_dividerColor=""           åˆ†å‰²çº¿é¢œè‰²
+            app:wheelView_gravity=""                æ–‡æœ¬ä½ç½®ï¼Œæœ‰å±…ä¸­ã€æœå·¦ã€æœå³3ç§
+            app:wheelView_lineSpacingMultiplier=""  æ¡ç›®é—´è·å€æ•°ï¼Œæ–‡æœ¬é«˜åº¦*æ¡ç›®é—´è·å€æ•°=æ¯è¡Œé«˜åº¦
 
 
-WheelView¹«¹²·½·¨-----------------------
-void setCurrentItem(int currentItem)          ÉèÖÃµ±Ç°Ñ¡ÖĞÏîÎ»ÖÃ
-void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener)ÉèÖÃ¹öÂÖ¹ö¶¯ºóÑ¡ÖĞitem¼àÌı
-boolean isLoop()                              ÊÇ·ñÑ­»·¹ö¶¯
-boolean isScroll()                            ÊÇ·ñ´¦ÓÚ¹ö¶¯×´Ì¬
-void setWheelSpec(WheelSpec.Builder builder)  ÉèÖÃ¹öÂÖÅäÖÃ
-WheelSpec.Builder getWheelSpecBuilder()       »ñÈ¡¹öÂÖÅäÖÃ
+WheelViewå…¬å…±æ–¹æ³•-----------------------
+void setCurrentItem(int currentItem)          è®¾ç½®å½“å‰é€‰ä¸­é¡¹ä½ç½®
+void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener)è®¾ç½®æ»šè½®æ»šåŠ¨åé€‰ä¸­itemç›‘å¬
+boolean isLoop()                              æ˜¯å¦å¾ªç¯æ»šåŠ¨
+boolean isScroll()                            æ˜¯å¦å¤„äºæ»šåŠ¨çŠ¶æ€
+void setWheelSpec(WheelSpec.Builder builder)  è®¾ç½®æ»šè½®é…ç½®
+WheelSpec.Builder getWheelSpecBuilder()       è·å–æ»šè½®é…ç½®
 
 
-WheelView¿ÉÉèÖÃWheelSpecÊôĞÔ---------------------
-isLoop(boolean)                ÊÇ·ñÑ­»·£¬Ä¬ÈÏtrue
-isOptions(boolean)             ÊÇ·ñÊÇÑ¡Ïî£¬Ä¬ÈÏfalse
-isCenterLabel(boolean)         ÊÇ·ñÖ»ÏÔÊ¾Ñ¡ÖĞÏîµÄlabel  Ä¬ÈÏtrue
-isSelfTextSize(boolean)        ÎÄ×Ö³¤¶È¹ı³¤¶øµ¼ÖÂ»æÖÆ³¬¹ıWheelViewµÄ¿í¶ÈÊ±£¬ÊÇ·ñ×ÔÊÊÓ¦ÎÄ×Ö´óĞ¡,Ä¬ÈÏfalse
-dividerType(boolean)           ·Ö¸îÏßÀàĞÍ,ÓĞWheelSpec.DividerType.FILL,WheelSpec.DividerType.WRAP Á½ÖÖ,Ä¬ÈÏFILL
-dividerColor(@ColorInt int)    ·Ö¸îÏßÑÕÉ«£¬Ğè´«Èë@ColorInt£¬Ä¬ÈÏ0xFFD5D5D5
-gravity(Gravity gravity)       ÎÄ±¾Î»ÖÃ£¬ÓĞ¾ÓÖĞGravity.CENTER¡¢³¯×óGravity.START¡¢³¯ÓÒGravity.END3ÖÖ£¬Ä¬ÈÏGravity.CENTER
-label(String)                  ¸½¼Óµ¥Î»,±ê×¢
-textSize(int)                  Ñ¡ÏîµÄÎÄ×Ö´óĞ¡,µ¥Î»sp
-textXOffset(int)               ÎÄ±¾Ë®Æ½·½ÏòÆ«ÒÆÁ¿
-typeface(Typeface)             ×ÖÌåÑùÊ½£¬ÀıÈçandroid.graphics.Typeface,Ä¬ÈÏÊÇµÈ¿í×ÖÌåTypeface.MONOSPACE
-textColorOut(@ColorInt int)    ÖÜÎ§ÎÄ×ÖÑÕÉ«
-textColorCenter(@ColorInt int) ÖĞĞÄÎÄ×ÖÑÕÉ«
-lineSpacingMultiplier(float)   ÌõÄ¿¼ä¾à±¶Êı£¬ÎÄ±¾¸ß¶È*ÌõÄ¿¼ä¾à±¶Êı=Ã¿ĞĞ¸ß¶È,¸ÃÖµÄ¬ÈÏ1.6F
-setCurrentItem(int)            ÉèÖÃ³õÊ¼Ñ¡ÖĞÎ»ÖÃ
+WheelViewå¯è®¾ç½®WheelSpecå±æ€§---------------------
+isLoop(boolean)                æ˜¯å¦å¾ªç¯ï¼Œé»˜è®¤true
+isOptions(boolean)             æ˜¯å¦æ˜¯é€‰é¡¹ï¼Œé»˜è®¤false
+isCenterLabel(boolean)         æ˜¯å¦åªæ˜¾ç¤ºé€‰ä¸­é¡¹çš„label  é»˜è®¤true
+isSelfTextSize(boolean)        æ–‡å­—é•¿åº¦è¿‡é•¿è€Œå¯¼è‡´ç»˜åˆ¶è¶…è¿‡WheelViewçš„å®½åº¦æ—¶ï¼Œæ˜¯å¦è‡ªé€‚åº”æ–‡å­—å¤§å°,é»˜è®¤false
+dividerType(boolean)           åˆ†å‰²çº¿ç±»å‹,æœ‰WheelSpec.DividerType.FILL,WheelSpec.DividerType.WRAP ä¸¤ç§,é»˜è®¤FILL
+dividerColor(@ColorInt int)    åˆ†å‰²çº¿é¢œè‰²ï¼Œéœ€ä¼ å…¥@ColorIntï¼Œé»˜è®¤0xFFD5D5D5
+gravity(Gravity gravity)       æ–‡æœ¬ä½ç½®ï¼Œæœ‰å±…ä¸­Gravity.CENTERã€æœå·¦Gravity.STARTã€æœå³Gravity.END3ç§ï¼Œé»˜è®¤Gravity.CENTER
+label(String)                  é™„åŠ å•ä½,æ ‡æ³¨
+textSize(int)                  é€‰é¡¹çš„æ–‡å­—å¤§å°,å•ä½sp
+textXOffset(int)               æ–‡æœ¬æ°´å¹³æ–¹å‘åç§»é‡
+typeface(Typeface)             å­—ä½“æ ·å¼ï¼Œä¾‹å¦‚android.graphics.Typeface,é»˜è®¤æ˜¯ç­‰å®½å­—ä½“Typeface.MONOSPACE
+textColorOut(@ColorInt int)    å‘¨å›´æ–‡å­—é¢œè‰²
+textColorCenter(@ColorInt int) ä¸­å¿ƒæ–‡å­—é¢œè‰²
+lineSpacingMultiplier(float)   æ¡ç›®é—´è·å€æ•°ï¼Œæ–‡æœ¬é«˜åº¦*æ¡ç›®é—´è·å€æ•°=æ¯è¡Œé«˜åº¦,è¯¥å€¼é»˜è®¤1.6F
+setCurrentItem(int)            è®¾ç½®åˆå§‹é€‰ä¸­ä½ç½®
 
 
-TimePickerÊ±¼äÑ¡ÔñÆ÷-----------------Ä¬ÈÏ²¼¾ÖR.layout.picker_view_time
-//¶¯Ì¬ÉèÖÃ±êÌâ
+TimePickeræ—¶é—´é€‰æ‹©å™¨-----------------é»˜è®¤å¸ƒå±€R.layout.picker_view_time
+//åŠ¨æ€è®¾ç½®æ ‡é¢˜
 void setTitleText(String)
-//ÉèÖÃÄ¬ÈÏÑ¡ÖĞÊ±¼ä
+//è®¾ç½®é»˜è®¤é€‰ä¸­æ—¶é—´
 TimePicker setCurrentDates(Integer year, Integer month, Integer day)
 TimePicker setCurrentDates(Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer second)
-//Ö÷¶¯µ÷ÓÃÑ¡ÖĞ¼àÌı»Øµ÷
+//ä¸»åŠ¨è°ƒç”¨é€‰ä¸­ç›‘å¬å›è°ƒ
 void optionSelect()
 
 
-OptionsPickerÑ¡ÏîÑ¡ÔñÆ÷--------------Ä¬ÈÏ²¼¾ÖR.layout.picker_view_options
-//¶¯Ì¬ÉèÖÃ±êÌâ
+OptionsPickeré€‰é¡¹é€‰æ‹©å™¨--------------é»˜è®¤å¸ƒå±€R.layout.picker_view_options
+//åŠ¨æ€è®¾ç½®æ ‡é¢˜
 void setTitleText(String)
-//ÉèÖÃÄ¬ÈÏÑ¡ÖĞÏî
+//è®¾ç½®é»˜è®¤é€‰ä¸­é¡¹
 OptionsPicker setSelectOptions(int)
 OptionsPicker setSelectOptions(int option1, int option2)
 OptionsPicker setSelectOptions(int option1, int option2, int option3)
-//ÉèÖÃÁª¶¯Êı¾İ£¬²¢³õÊ¼»¯
+//è®¾ç½®è”åŠ¨æ•°æ®ï¼Œå¹¶åˆå§‹åŒ–
 OptionsPicker setPicker(List<T> optionsItems)
 OptionsPicker setPicker(List<T> options1Items, List<List<T>> options2Items)
 OptionsPicker setPicker(List<T> options1Items, List<List<T>> options2Items, List<List<List<T>>> options3Items)
-//ÉèÖÃ²»Áª¶¯Êı¾İ£¬²¢³õÊ¼»¯
+//è®¾ç½®ä¸è”åŠ¨æ•°æ®ï¼Œå¹¶åˆå§‹åŒ–
 OptionsPicker setNPicker(List<T> options1Items, List<T> options2Items, List<T> options3Items)
-//Ö÷¶¯µ÷ÓÃÑ¡ÖĞ¼àÌı»Øµ÷
+//ä¸»åŠ¨è°ƒç”¨é€‰ä¸­ç›‘å¬å›è°ƒ
 void optionSelect()
 
 
-PickerConfig.Builder-----------------Ñ¡ÔñÆ÷ÅäÖÃ
-optionsSelectListener(OnOptionsSelectListener)Ñ¡ÏîÑ¡Ôñ¼àÌı£¬µã»÷È·¶¨°´Å¥µ÷ÓÃtimeSelectListener(OnTimeSelectListener)Ê±¼äÑ¡Ôñ¼àÌı£¬µã»÷È·¶¨°´Å¥µ÷ÓÃtimeSelectChangeListener(OnTimeSelectChangeListener)Ê±¼ä¸Ä±ä¼àÌıoptionsSelectChangeListener(OnOptionsSelectChangeListener)Ñ¡Ïî¸Ä±ä¼àÌıcustomListener(OnCustomListener)¶¨ÖÆ²¼¾Ö´¦Àí¼àÌı£¬Ğè×ÔĞĞÊµÏÖ²¼¾Ö³õÊ¼»¯cancelListener(View.OnClickListener)È¡Ïû°´Å¥¼àÌıisRestoreItem(boolean)Áª¶¯ÇĞ»»Ê±£¬ÊÇ·ñ½«Áª¶¯ÏîÖØÖÃÎªµÚÒ»ÏîsetCurrentItemtimeDisplayType(boolean[])   Ê±¼äÑ¡ÔñÆ÷ÏÔÊ¾ÀàĞÍ£¬Ä¬ÈÏÏÔÊ¾£º ÄêÔÂÈÕ£¬ ²»ÏÔÊ¾Ê±·ÖÃëcurrentDate(Calendar currentDate)     ÉèÖÃµ±Ç°Ñ¡ÖĞÊ±¼ä
-setRangDate(Calendar startDate, Calendar endDate)  ÉèÖÃÑ¡ÖĞ¿ªÊ¼¡¢½áÊøÇø¼ä
-setRangYear(int startYear, int endYear) ÉèÖÃÑ¡ÖĞ¿ªÊ¼¡¢½áÊøÄê·İÇø¼ä
-isLunarCalendar(boolean)ÊÇ·ñÏÔÊ¾Å©Àú(ÔİÎŞ¹¦ÄÜ)
-pickerType(@PickerConfig.PickerType int val)TYPE_PICKER_OPTIONSÑ¡ÏîÑ¡ÔñÆ÷, PickerType.TYPE_PICKER_TIMEÊ±¼äÑ¡ÔñÆ÷
-layoutRes(int)  ÉèÖÃ²¼¾Ö£¬Ä¬ÈÏÓĞR.layout.picker_view_options¡¢R.layout.picker_view_time£¬×Ô¶¨Òå¿ÉÉèÖÃÑùÊ½(idÒª²ÎÕÕÄ¬ÈÏ)
-decorView(ViewGroup decorView)ÉèÖÃÑ¡ÔñÆ÷½«Ìí¼Óµ½decorViewÈİÆ÷ÀïÃæ
-textContentConfirm(String) È·¶¨°´Å¥ÎÄ×Ö
-textContentCancel(String)  È¡Ïû°´Å¥ÎÄ×Ö
-textContentTitle(String)   ÖĞ¼ä±êÌâÎÄ×Ö
-textColorConfirm(@ColorInt int)È·¶¨°´Å¥ÑÕÉ«
-textColorCancel(@ColorInt int)È¡Ïû°´Å¥ÑÕÉ«
-textColorTitle(@ColorInt int)ÖĞ¼ä±êÌâÑÕÉ«
-bgColorWheel(@ColorInt int)¹öÂÖ±³¾°ÑÕÉ«
-bgColorTitle(@ColorInt int)±êÌâ±³¾°ÑÕÉ«
-textSizeSubmitCancel(@IntRange(from = 10) int)È·¶¨È¡Ïû°´Å¥´óĞ¡
-textSizeTitle(@IntRange(from = 10) int)±êÌâÎÄ×Ö´óĞ¡
-outSideColor(@ColorInt int)Ñ¡ÔñÆ÷±³¾°É«ÑÕÉ«,Ä¬ÈÏÊÇ»ÒÉ«
-isDialog(boolean)ÊÇ·ñÊÇµ¯´°Ä£Ê½£¬Ä¬ÈÏfalse
-cancelable(boolean val)ÊÇ·ñÄÜµã»÷·µ»Ø¼ü¡¢µã»÷µ¯´°Íâ²¿È¡Ïûµ¯´°
-configSpec(PickerConfigSpec)ÉèÖÃÑ¡ÔñÆ÷ÅäÖÃ¹æ·¶
-spec(WheelSpec.Builder)ÉèÖÃ¹öÂÖÅäÖÃÊôĞÔ
+PickerConfig.Builder-----------------é€‰æ‹©å™¨é…ç½®
+optionsSelectListener(OnOptionsSelectListener)é€‰é¡¹é€‰æ‹©ç›‘å¬ï¼Œç‚¹å‡»ç¡®å®šæŒ‰é’®è°ƒç”¨timeSelectListener(OnTimeSelectListener)æ—¶é—´é€‰æ‹©ç›‘å¬ï¼Œç‚¹å‡»ç¡®å®šæŒ‰é’®è°ƒç”¨timeSelectChangeListener(OnTimeSelectChangeListener)æ—¶é—´æ”¹å˜ç›‘å¬optionsSelectChangeListener(OnOptionsSelectChangeListener)é€‰é¡¹æ”¹å˜ç›‘å¬customListener(OnCustomListener)å®šåˆ¶å¸ƒå±€å¤„ç†ç›‘å¬ï¼Œéœ€è‡ªè¡Œå®ç°å¸ƒå±€åˆå§‹åŒ–cancelListener(View.OnClickListener)å–æ¶ˆæŒ‰é’®ç›‘å¬isRestoreItem(boolean)è”åŠ¨åˆ‡æ¢æ—¶ï¼Œæ˜¯å¦å°†è”åŠ¨é¡¹é‡ç½®ä¸ºç¬¬ä¸€é¡¹setCurrentItemtimeDisplayType(boolean[])   æ—¶é—´é€‰æ‹©å™¨æ˜¾ç¤ºç±»å‹ï¼Œé»˜è®¤æ˜¾ç¤ºï¼š å¹´æœˆæ—¥ï¼Œ ä¸æ˜¾ç¤ºæ—¶åˆ†ç§’currentDate(Calendar currentDate)     è®¾ç½®å½“å‰é€‰ä¸­æ—¶é—´
+setRangDate(Calendar startDate, Calendar endDate)  è®¾ç½®é€‰ä¸­å¼€å§‹ã€ç»“æŸåŒºé—´
+setRangYear(int startYear, int endYear) è®¾ç½®é€‰ä¸­å¼€å§‹ã€ç»“æŸå¹´ä»½åŒºé—´
+isLunarCalendar(boolean)æ˜¯å¦æ˜¾ç¤ºå†œå†(æš‚æ— åŠŸèƒ½)
+pickerType(@PickerConfig.PickerType int val)TYPE_PICKER_OPTIONSé€‰é¡¹é€‰æ‹©å™¨, PickerType.TYPE_PICKER_TIMEæ—¶é—´é€‰æ‹©å™¨
+layoutRes(int)  è®¾ç½®å¸ƒå±€ï¼Œé»˜è®¤æœ‰R.layout.picker_view_optionsã€R.layout.picker_view_timeï¼Œè‡ªå®šä¹‰å¯è®¾ç½®æ ·å¼(idè¦å‚ç…§é»˜è®¤)
+decorView(ViewGroup decorView)è®¾ç½®é€‰æ‹©å™¨å°†æ·»åŠ åˆ°decorViewå®¹å™¨é‡Œé¢
+textContentConfirm(String) ç¡®å®šæŒ‰é’®æ–‡å­—
+textContentCancel(String)  å–æ¶ˆæŒ‰é’®æ–‡å­—
+textContentTitle(String)   ä¸­é—´æ ‡é¢˜æ–‡å­—
+textColorConfirm(@ColorInt int)ç¡®å®šæŒ‰é’®é¢œè‰²
+textColorCancel(@ColorInt int)å–æ¶ˆæŒ‰é’®é¢œè‰²
+textColorTitle(@ColorInt int)ä¸­é—´æ ‡é¢˜é¢œè‰²
+bgColorWheel(@ColorInt int)æ»šè½®èƒŒæ™¯é¢œè‰²
+bgColorTitle(@ColorInt int)æ ‡é¢˜èƒŒæ™¯é¢œè‰²
+textSizeSubmitCancel(@IntRange(from = 10) int)ç¡®å®šå–æ¶ˆæŒ‰é’®å¤§å°
+textSizeTitle(@IntRange(from = 10) int)æ ‡é¢˜æ–‡å­—å¤§å°
+outSideColor(@ColorInt int)é€‰æ‹©å™¨èƒŒæ™¯è‰²é¢œè‰²,é»˜è®¤æ˜¯ç°è‰²
+isDialog(boolean)æ˜¯å¦æ˜¯å¼¹çª—æ¨¡å¼ï¼Œé»˜è®¤false
+cancelable(boolean val)æ˜¯å¦èƒ½ç‚¹å‡»è¿”å›é”®ã€ç‚¹å‡»å¼¹çª—å¤–éƒ¨å–æ¶ˆå¼¹çª—
+configSpec(PickerConfigSpec)è®¾ç½®é€‰æ‹©å™¨é…ç½®è§„èŒƒ
+spec(WheelSpec.Builder)è®¾ç½®æ»šè½®é…ç½®å±æ€§
 
 
-PickerConfigSpec---------------------Ñ¡ÔñÆ÷ÅäÖÃËµÃ÷,Í¨³£ÆÕÍ¨Ñ¡ÔñÆ÷Ö»ÓÃµ½Ç°3¸ö£¬Ê±¼äÑ¡ÔñÆ÷×î¶àÓÃµ½6¸ö
-//ÉèÖÃ¹öÂÖÅäÖÃÊôĞÔ
+PickerConfigSpec---------------------é€‰æ‹©å™¨é…ç½®è¯´æ˜,é€šå¸¸æ™®é€šé€‰æ‹©å™¨åªç”¨åˆ°å‰3ä¸ªï¼Œæ—¶é—´é€‰æ‹©å™¨æœ€å¤šç”¨åˆ°6ä¸ª
+//è®¾ç½®æ»šè½®é…ç½®å±æ€§
 setWheelSpec(WheelSpec.Builder builder)
-//ÉèÖÃµÚÒ»¶şÈı¼¶Ñ¡ÏîµÄµ¥Î»
+//è®¾ç½®ç¬¬ä¸€äºŒä¸‰çº§é€‰é¡¹çš„å•ä½
 labels(String label1, String label2, String label3)
-//ÉèÖÃÊ±¼äÑ¡ÔñÆ÷µ¥Î»
+//è®¾ç½®æ—¶é—´é€‰æ‹©å™¨å•ä½
 labels(String label1, String label2, String label3, String label4, String label5, String label6)
-//ÉèÖÃÒ»¶şÈı¼¶Ñ¡ÏîµÄÑ¡ÖĞ
+//è®¾ç½®ä¸€äºŒä¸‰çº§é€‰é¡¹çš„é€‰ä¸­
 setCurrentItems(int option1, int option2, int option3)
-//ÉèÖÃÊ±¼äÑ¡ÔñÆ÷µÄÑ¡ÖĞ
+//è®¾ç½®æ—¶é—´é€‰æ‹©å™¨çš„é€‰ä¸­
 setCurrentItems(int option1, int option2, int option3, int option4, int option5, int option6)
-// ·Ö±ğÉèÖÃµÚÒ»¶şÈı¼¶ÊÇ·ñÑ­»·¹ö¶¯
+// åˆ†åˆ«è®¾ç½®ç¬¬ä¸€äºŒä¸‰çº§æ˜¯å¦å¾ªç¯æ»šåŠ¨
 cyclics(boolean cyclic1, boolean cyclic2, boolean cyclic3)
-// ·Ö±ğÉèÖÃÊ±¼äÑ¡ÔñÆ÷ÊÇ·ñÑ­»·¹ö¶¯
+// åˆ†åˆ«è®¾ç½®æ—¶é—´é€‰æ‹©å™¨æ˜¯å¦å¾ªç¯æ»šåŠ¨
 cyclics(boolean cyclic1, boolean cyclic2, boolean cyclic3, boolean cyclic4, boolean cyclic5, boolean cyclic6)
-//·Ö±ğÉèÖÃµÚÒ»¶şÈı¼¶µÄxÖáÆ«ÒÆÁ¿
+//åˆ†åˆ«è®¾ç½®ç¬¬ä¸€äºŒä¸‰çº§çš„xè½´åç§»é‡
 textXOffset(int x_offset_one, int x_offset_two, int x_offset_three)
-//·Ö±ğÉèÖÃÊ±¼äÑ¡ÔñÆ÷µÄxÖáÆ«ÒÆÁ¿
+//åˆ†åˆ«è®¾ç½®æ—¶é—´é€‰æ‹©å™¨çš„xè½´åç§»é‡
 textXOffset(int x_offset_one, int x_offset_two, int x_offset_three, int x_offset_four, int x_offset_five, int x_offset_six)
+       
+```
+
