@@ -30,32 +30,45 @@ dependencies {
      //图片选择器，需配套使用hykjBase
      implementation 'com.base.selector:selector:1.0.0'
      
+     //新的图片选择器依赖库,只需要依赖谷歌support库，无需依赖其他库
+     implementation 'com.cjf.selector:selector:1.0.0-beta'
+
+     
      //如果你升级到androidx，请使用下面依赖
      //基本功能依赖库
      implementation 'com.Ghostbullets.base:base-androidx:0.1.2'
      //图片选择器，需配套base-androidx使用
      implementation 'com.base.selector:selector-androidx1.0.1'
+     
+      //新的图片选择器依赖库,只需要依赖谷歌androidx库，无需依赖其他库
+      (待转换为androidx发布)
     ···
 }
 ```
 
-3.使用
+### 2.2、代码中使用
 
 ```
 使用示例
 MediaAction.from(Activity activity)
                     .choose(new MimeType(MimeType.GetType.IMAGE))//选择媒体文件类型
+                    .capture(true) //是否显示拍照功能
+                    .themeId(R.style.MySelectorTheme) //允许设置主题，默认主题R.style.selectorTheme 具体属性请看下面代码
+                    .providerName(".FileProvider") //7.0以上版本拍照用到provider，默认.FileProvider
                     .countable(true)//是否显示自动添加的数字或者复选标记
                     .spanCount(4)//一行显示几张图
-                    .imageEngine(new GlideEngine())//使用哪种图片加载器
+                    .imageEngine(new GlideEngine())//使用哪种图片加载器,并在gradle中implementation对应库，默认Glide
                     .maxSelectable(8)//最多可选择的数
-                    .originalEnable(false)//是否使用原图(暂时没用)
-                    .setOnSelectedListener(new OnSelectedListener() {
+                    .originalEnable(false)//是否显示原图单选框
+                    .setOnSelectChangeListener() //媒体文件选中状态改变监听
+                    .setOnSelectedListener(new OnSelectedListener() { //媒体文件选中监听,也可以在onActivityResult中接收
                         @Override
                         public void onSelected(@NonNull List<Uri> uriList, @NonNull List<String> pathList) {
-
+                            list.clear();
+                            list.addAll(pathList);
                         }
                     })
+                    .setOnOriginalCheckedListener()//原图选中状态改变监听
                     .setSelectMediaPaths(list)//传入选中文件路径集合
                     // .setSelectMediaUris()//传入选中文件Url集合
                     .forResult(5);//开始选择媒体等待结果
@@ -69,8 +82,10 @@ MediaAction.from(Activity activity)
             }
         }
     }
+```
 
-
+### 2.3、方法解析
+```
 MediaAction类方法讲解
 //从页面启动选择器
 from(Activity activity)
@@ -88,18 +103,22 @@ SelectionCreator choose(MimeType mimeType)
 SelectionCreator类方法讲解
 //如果只选择图像或视频作为媒体，是否只显示一种媒体类型。(暂无用)
 showSingleMediaType(boolean showSingleMediaType)
+7.0以上版本可能要用到FileProvider
+providerName(String providerName)
 //是否显示自动添加的数字或者复选标记
 countable(boolean countable)
 //最多可选择的数
 maxSelectable(int maxSelectable)
 为图像和视频媒体类型选择文件。(暂无用)
 maxSelectablePerMediaType(int maxImageSelectable, int maxVideoSelectable)
-//是否在媒体网格视图上启用了拍照功能。(功能暂未实现)
+//是否在媒体网格视图上启用了拍照功能。
 capture(boolean enable)
 //是否使用原图
 originalEnable(boolean enable)
 //最大原始大小，单位为MB，不可选择超过该大小的多媒体文件，使用原图情况下生效
 maxOriginalSize(int size)
+设置selector 选择器的主题
+themeId(@StyleRes int themeStyleId)
 //设置此活动的预期方向(暂无用)
 restrictOrientation(@ScreenOrientation int orientation)
 //一行显示几张图
@@ -112,10 +131,12 @@ thumbnailScale(@FloatRange(from = 0.0f, to = 1.0f) float scale)
 imageEngine(ImageEngine imageEngine)
 //设置占位图
 placeholder(@DrawableRes int placeholder)
+//媒体文件选中状态改变监听，当用户选择或取消选择某些内容时，立即为回调设置侦听器。
+setOnSelectChangeListener(@Nullable OnSelectChangeListener listener)
 //媒体文件选中监听
 setOnSelectedListener(@Nullable OnSelectedListener listener)
 //当用户选中或取消选中原图时，立即将侦听器设置为回调。
-setOnCheckedListener(@Nullable OnCheckedListener listener)
+setOnOriginalCheckedListener(@Nullable OnOriginalCheckedListener listener)
 //选中文件路径集合
 setSelectMediaPaths(@Nullable ArrayList<String> selectMediaPaths)
 //选中文件Uri集合
@@ -123,4 +144,133 @@ setSelectMediaUris(@Nullable ArrayList<Uri> selectMediaUris)
 开始选择媒体并等待结果。
 forResult(int requestCode)
        
+```
+### 2.4、主题设置
+```
+1.默认主题属性
+ <!--selector 属性-->
+    <!--头部标题左侧返回箭头 图标-->
+    <attr name="selector_title_back_icon" format="reference" />
+    <!--选择框 图标-->
+    <attr name="selector_choice_box_icon" format="reference" />
+    <!--单选框 图标-->
+    <attr name="selector_radio_box_icon" format="reference" />
+    <!--媒体文件封面阴影颜色,根据select不同显示 图像或颜色-->
+    <attr name="selector_choice_shade_color" format="reference|color" />
+    <!--头部标题下拉上拉文件夹 图标-->
+    <attr name="selector_arrows_down_up_icon" format="reference" />
+    <!-- 媒体文件封面视频标记 图标-->
+    <attr name="selector_video_icon" format="reference" />
+    <!--媒体文件封面gif标记 图标-->
+    <attr name="selector_gif_icon" format="reference" />
+    <!--拍照图标-->
+    <attr name="selector_camera_icon" format="reference" />
+    <!--拍照图标背景色-->
+    <attr name="selector_camera_background" format="reference|color" />
+
+    <!--所有字体颜色 引用或颜色-->
+    <attr name="selector_text_color" format="reference|color" />
+    <!--标题字体大小 引用或尺寸-->
+    <attr name="selector_title_text_size" format="reference|dimension" />
+    <!--所有字体大小 引用或尺寸-->
+    <attr name="selector_text_size" format="reference|dimension" />
+    <!--状态栏  背景颜色；图标颜色类型(白色或黑色) 仅在5.0以上生效-->
+    <attr name="selector_status_background" format="reference|color" />
+    <attr name="selector_status_icon_color_type" format="enum">
+        <enum name="white" value="0" />
+        <enum name="black" value="1" />
+    </attr>
+    <!--页面背景色  引用或颜色-->
+    <attr name="selector_background" format="reference|color" />
+    <!--标题栏、底部栏 背景色  引用或颜色-->
+    <attr name="selector_title_bottom_background" format="reference|color" />
+    <!--选中字体颜色  引用或颜色-->
+    <attr name="selector_select_text_color" format="reference|color" />
+    <!--dialog 样式  引用-->
+    <attr name="selector_dialog_style" format="reference" />
+    <!--授权存储权限弹窗布局,里面必须有4个TextView id分别 为tv_title、tv_content、tv_confirm、tv_cancel-->
+    <attr name="selector_permission_dialog_layout" format="reference" />
+    <!--进度弹窗-->
+    <attr name="selector_progress_dialog_layout" format="reference" />
+
+    <!--设备无资源时，显示图片、提示文字文本、颜色、字体大小-->
+    <attr name="selector_empty_icon" format="reference" />
+    <attr name="selector_empty_color" format="reference|color" />
+    <attr name="selector_empty_text" format="reference|string" />
+    <attr name="selector_empty_text_size" format="reference|dimension" />
+
+2.默认主题(仿微信偏黑色风格)
+  <style name="selectorTheme" parent="Theme.AppCompat.NoActionBar">
+        <!--头部标题左侧返回箭头 图标-->
+        <item name="selector_title_back_icon">@drawable/ic_selector_white_back</item>
+        <!--选择框 图标-->
+        <item name="selector_choice_box_icon">@drawable/selector_media_icon</item>
+        <!--单选框 图标-->
+        <item name="selector_radio_box_icon">@drawable/selector_original_icon</item>
+        <!--媒体文件封面阴影颜色,根据select不同显示 图像或颜色-->
+        <item name="selector_choice_shade_color">@drawable/selector_choice_shade_color</item>>
+        <!--头部标题下拉上拉文件夹 图标-->
+        <item name="selector_arrows_down_up_icon">@drawable/selector_arrows_down_up</item>
+        <!-- 媒体文件封面视频标记 图标-->
+        <item name="selector_video_icon">@drawable/ic_selector_video</item>
+        <!--媒体文件封面gif标记 图标-->
+        <item name="selector_gif_icon">@drawable/ic_selector_gif</item>
+        <!--拍照图标-->
+        <item name="selector_camera_icon">@drawable/ic_selector_camera</item>
+        <!--拍照图标背景色-->
+        <item name="selector_camera_background">@color/selector_camera_background</item>
+        <!--所有字体颜色 引用或颜色-->
+        <item name="selector_text_color">@color/selector_text_color</item>
+        <!--标题字体大小 引用或尺寸-->
+        <item name="selector_title_text_size">@dimen/selector_title_text_size</item>
+        <!--所有字体大小 引用或尺寸-->
+        <item name="selector_text_size">@dimen/selector_text_size</item>
+        <!--状态栏  背景颜色；图标颜色类型(白色或黑色) 仅在5.0以上生效-->
+        <item name="selector_status_background">@color/selector_status_background</item>
+        <item name="selector_status_icon_color_type">white</item>
+        <!--页面背景色  引用或颜色-->
+        <item name="selector_background">@color/selector_background</item>
+        <!--标题栏、底部栏 背景色  引用或颜色-->
+        <item name="selector_title_bottom_background">@color/selector_title_bottom_background</item>
+        <!--选中字体颜色  引用或颜色-->
+        <item name="selector_select_text_color">@color/selector_select_text_color</item>
+        <!--dialog 样式  引用-->
+        <item name="selector_dialog_style">@style/custom_dialog</item>
+        <!--授权存储权限弹窗布局,里面必须有4个TextView id分别 为tv_title、tv_content、tv_confirm、tv_cancel-->
+        <item name="selector_permission_dialog_layout">@layout/dialog_selector_confirm</item>
+        <!--进度弹窗自定义布局-->
+        <item name="selector_progress_dialog_layout">@layout/dialog_progress_bar_circle</item>
+
+        <!--设备无资源时，显示图片、提示文字文本、颜色、字体大小-->
+        <item name="selector_empty_icon">@drawable/ic_empty_icon</item>
+        <item name="selector_empty_color">@color/selector_empty_color</item>
+        <item name="selector_empty_text">@string/selector_empty_text</item>
+        <item name="selector_empty_text_size">@dimen/selector_empty_text_size</item>
+    </style>
+    
+    selector_media_icon.xml
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_selector_choice_box_check" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_selector_choice_box_un_check" />
+    </selector>
+    
+    selector_original_icon.xml
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_selector_radio_box_check" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_selector_radio_box_un_check" />
+    </selector>
+    
+    selector_choice_shade_color.xml
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/selector_choice_check_shade_color" android:state_selected="true" />
+    <item android:drawable="@color/selector_choice_un_check_shade_color" />
+    </selector>
+    
+    selector_arrows_down_up.xml
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_selector_arrows_up" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_selector_arrows_down" />
+    </selector>
+
+
 ```
