@@ -7,6 +7,13 @@ selector依赖库
     1.预览界面可以拖动已选列表项，更换图片选中位置
     2.预览界面长按弹出详情弹窗
     3.当只选择一张图片的时候，提供裁剪功能(图片放大、旋转，裁剪框比例)
+    4.(bug)标题设置了ellipsize,文字从 多-->少-->多 会出现省略号
+    
+ ### 1.0.0-beta3 特性
+ * theme主题的selector_title_bottom_background属性拆分为selector_title_background、selector_bottom_background，增加selector_title_height
+ 、selector_bottom_height属性
+ * 界面UI布局优化，增加清除并退出功能(清除选择并退出)
+ * 支持传入application的context来打开图片选择器，可通过setOnSelectedListener方法获取选中媒体文件
 
 ### 1.0.0-beta 特性
  * 基本功能实现
@@ -41,7 +48,7 @@ dependencies {
      
      //新的图片选择器依赖库,只需要依赖谷歌support库，无需依赖其他库，另外根据你选择的图片加载方式引用图片加载库(默认glide)
      //内部引用了jiaozivideoplayer用于视频播放
-     implementation 'com.cjf.selector:selector:1.0.0-beta'
+     implementation 'com.cjf.selector:selector:1.0.0-beta3'
 
      
      //如果你升级到androidx，请使用下面依赖
@@ -92,6 +99,18 @@ MediaAction.from(Activity activity)
             }
         }
     }
+    
+    //可传入application的context
+    MediaAction.from(Context context)
+                    .choose(new MimeType(MimeType.GetType.IMAGE))//选择媒体文件类型
+                    .setOnSelectedListener(new OnSelectedListener() { //媒体文件选中监听,也可以在onActivityResult中接收
+                        @Override
+                        public void onSelected(@NonNull List<Uri> uriList, @NonNull List<String> pathList) {
+                            list.clear();
+                            list.addAll(pathList);
+                        }
+                    })
+                    .start()
 ```
 
 ### 2.3、方法解析
@@ -101,6 +120,8 @@ MediaAction类方法讲解
 from(Activity activity)
 //从碎片启动选择器
 from(Fragment fragment)
+//从上下文启动选择器
+from(Context context)
 //在启动的活动或片段中获取用户选择的媒体的{@link Uri}列表
 List<Uri> obtainResult(Intent data)
 //获取启动的活动或片段中用户选择的媒体路径列表
@@ -109,6 +130,7 @@ List<String> obtainPathResult(Intent data)
 boolean obtainOriginalState(Intent data)
 //选择媒体文件类型
 SelectionCreator choose(MimeType mimeType)
+
 
 SelectionCreator类方法讲解
 //如果只选择图像或视频作为媒体，是否只显示一种媒体类型。(暂无用)
@@ -153,6 +175,8 @@ setSelectMediaPaths(@Nullable ArrayList<String> selectMediaPaths)
 setSelectMediaUris(@Nullable ArrayList<Uri> selectMediaUris)
 开始选择媒体并等待结果。
 forResult(int requestCode)
+//通过上下文方式开始选择媒体
+start()
        
 ```
 ### 2.4、主题设置
@@ -192,8 +216,20 @@ forResult(int requestCode)
     </attr>
     <!--页面背景色  引用或颜色-->
     <attr name="selector_background" format="reference|color" />
-    <!--标题栏、底部栏 背景色  引用或颜色-->
-    <attr name="selector_title_bottom_background" format="reference|color" />
+     <!--标题栏 背景色  引用或颜色-->
+    <attr name="selector_title_background" format="reference|color" />
+    <!--底部栏 背景色  引用或颜色-->
+    <attr name="selector_bottom_background" format="reference|color" />
+    <!--标题栏高度  尺寸-->
+    <attr name="selector_title_height" format="dimension">
+        <enum name="match_parent" value="-1" />
+        <enum name="wrap_content" value="-2" />
+    </attr>
+    <!--底部栏高度  尺寸-->
+    <attr name="selector_bottom_height" format="dimension">
+        <enum name="match_parent" value="-1" />
+        <enum name="wrap_content" value="-2" />
+    </attr>
     <!--选中字体颜色  引用或颜色-->
     <attr name="selector_select_text_color" format="reference|color" />
     <!--dialog 样式  引用-->
@@ -240,8 +276,14 @@ forResult(int requestCode)
         <item name="selector_status_icon_color_type">white</item>
         <!--页面背景色  引用或颜色-->
         <item name="selector_background">@color/selector_background</item>
-        <!--标题栏、底部栏 背景色  引用或颜色-->
-        <item name="selector_title_bottom_background">@color/selector_title_bottom_background</item>
+        <!--标题栏 背景色  引用或颜色-->
+        <item name="selector_title_background">@color/selector_title_background</item>
+        <!--底部栏 背景色  引用或颜色-->
+        <item name="selector_bottom_background">@color/selector_bottom_background</item>
+        <!--标题栏高度  默认wrap_content 尺寸-->
+        <item name="selector_title_height">wrap_content</item>
+        <!--底部栏高度  默认wrap_content 尺寸-->
+        <item name="selector_bottom_height">wrap_content</item>
         <!--选中字体颜色  引用或颜色-->
         <item name="selector_select_text_color">@color/selector_select_text_color</item>
         <!--dialog 样式  引用-->
