@@ -1,7 +1,16 @@
 # MavenTest
 selector依赖库
 
-## 1、演示（请star支持）
+## 1、版本描述（请star支持）
+
+### 后续开发优化
+    1.预览界面可以拖动已选列表项，更换图片选中位置
+    2.预览界面长按弹出详情弹窗
+    3.当只选择一张图片的时候，提供裁剪功能(图片放大、旋转，裁剪框比例)
+
+### 1.0.0-beta 特性
+ * 基本功能实现
+ * 除了图片加载库、jiaozivideoplayer视频播放库以及谷歌support库，移除其他三方库
 
 ## 2、如何使用
 目前支持主流开发工具AndroidStudio的使用，直接配置build.gradle，增加依赖即可.
@@ -30,7 +39,8 @@ dependencies {
      //图片选择器，需配套使用hykjBase
      implementation 'com.base.selector:selector:1.0.0'
      
-     //新的图片选择器依赖库,只需要依赖谷歌support库，无需依赖其他库
+     //新的图片选择器依赖库,只需要依赖谷歌support库，无需依赖其他库，另外根据你选择的图片加载方式引用图片加载库(默认glide)
+     //内部引用了jiaozivideoplayer用于视频播放
      implementation 'com.cjf.selector:selector:1.0.0-beta'
 
      
