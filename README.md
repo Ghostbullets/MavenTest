@@ -15,6 +15,8 @@ allprojects {
         ...
         maven { url "https://jitpack.io" }
         maven { url 'https://raw.githubusercontent.com/Ghostbullets/MavenTest/master' }
+        //上述地址无法访问时可挂代理
+        maven { url 'https://cdn.jsdelivr.net/gh/Ghostbullets/MavenTest' }
     }
 }
 ```
@@ -36,6 +38,9 @@ dependencies {
 
      //图片选择器，需配套使用hykjBase
      implementation 'com.base.selector:selector:1.0.0'
+     
+     //图片选择器，只需要谷歌support库支持，另外根据你选择的图片加载方式引用图片加载库(默认glide)
+     implementation 'com.cjf.selector:selector:1.0.0-beta'
      
      //轮播图
      implementation 'com.base.banner:banner:1.0.1'
