@@ -3,7 +3,7 @@ selector依赖库
 
 ## 1、版本描述（请star支持）
 
-### 后续开发优化
+### 后续开发优化计划
     1.预览界面可以拖动已选列表项，更换图片选中位置
     2.预览界面长按弹出详情弹窗
     3.当只选择一张图片的时候，提供裁剪功能(图片放大、旋转，裁剪框比例)
@@ -185,15 +185,15 @@ start()
  <!--selector 属性-->
     <!--头部标题左侧返回箭头 图标-->
     <attr name="selector_title_back_icon" format="reference" />
+    <!--头部标题下拉上拉文件夹右侧标记 图标-->
+    <attr name="selector_arrows_down_up_icon" format="reference" />
     <!--选择框 图标-->
     <attr name="selector_choice_box_icon" format="reference" />
     <!--单选框 图标-->
     <attr name="selector_radio_box_icon" format="reference" />
     <!--媒体文件封面阴影颜色,根据select不同显示 图像或颜色-->
     <attr name="selector_choice_shade_color" format="reference|color" />
-    <!--头部标题下拉上拉文件夹 图标-->
-    <attr name="selector_arrows_down_up_icon" format="reference" />
-    <!-- 媒体文件封面视频标记 图标-->
+    <!--媒体文件封面视频标记 图标-->
     <attr name="selector_video_icon" format="reference" />
     <!--媒体文件封面gif标记 图标-->
     <attr name="selector_gif_icon" format="reference" />
@@ -202,6 +202,10 @@ start()
     <!--拍照图标背景色-->
     <attr name="selector_camera_background" format="reference|color" />
 
+    <!--选中字体颜色 (PS:这里指右上角确定按钮)  引用或颜色-->
+    <attr name="selector_select_text_color" format="reference|color" />
+    <!--选中字体文本 (PS:这里指右上角确定按钮)-->
+    <attr name="selector_select_text" format="string" />
     <!--所有字体颜色 引用或颜色-->
     <attr name="selector_text_color" format="reference|color" />
     <!--标题字体大小 引用或尺寸-->
@@ -214,9 +218,21 @@ start()
         <enum name="white" value="0" />
         <enum name="black" value="1" />
     </attr>
+    <!--是否显示媒体文件选择页面的清除并退出按钮-->
+    <attr name="selector_media_cancel_visibility" format="enum">
+        <enum name="VISIBLE" value="0" />
+        <enum name="GONE" value="8" />
+    </attr>
+    <!--清除并退出文本-->
+    <attr name="selector_media_cancel_text" format="string" />
+    <!--是否显示预览界面的详细信息按钮-->
+    <attr name="selector_media_details_info_visibility" format="enum">
+        <enum name="VISIBLE" value="0" />
+        <enum name="GONE" value="8" />
+    </attr>
     <!--页面背景色  引用或颜色-->
     <attr name="selector_background" format="reference|color" />
-     <!--标题栏 背景色  引用或颜色-->
+    <!--标题栏 背景色  引用或颜色-->
     <attr name="selector_title_background" format="reference|color" />
     <!--底部栏 背景色  引用或颜色-->
     <attr name="selector_bottom_background" format="reference|color" />
@@ -230,33 +246,31 @@ start()
         <enum name="match_parent" value="-1" />
         <enum name="wrap_content" value="-2" />
     </attr>
-    <!--选中字体颜色  引用或颜色-->
-    <attr name="selector_select_text_color" format="reference|color" />
     <!--dialog 样式  引用-->
     <attr name="selector_dialog_style" format="reference" />
     <!--授权存储权限弹窗布局,里面必须有4个TextView id分别 为tv_title、tv_content、tv_confirm、tv_cancel-->
     <attr name="selector_permission_dialog_layout" format="reference" />
-    <!--进度弹窗-->
+    <!--进度弹窗自定义布局-->
     <attr name="selector_progress_dialog_layout" format="reference" />
 
     <!--设备无资源时，显示图片、提示文字文本、颜色、字体大小-->
     <attr name="selector_empty_icon" format="reference" />
-    <attr name="selector_empty_color" format="reference|color" />
     <attr name="selector_empty_text" format="reference|string" />
+    <attr name="selector_empty_color" format="reference|color" />
     <attr name="selector_empty_text_size" format="reference|dimension" />
 
 2.默认主题(仿微信偏黑色风格)
   <style name="selectorTheme" parent="Theme.AppCompat.NoActionBar">
         <!--头部标题左侧返回箭头 图标-->
         <item name="selector_title_back_icon">@drawable/ic_selector_white_back</item>
+        <!--头部标题下拉上拉文件夹右侧标记 图标-->
+        <item name="selector_arrows_down_up_icon">@drawable/selector_arrows_down_up</item>
         <!--选择框 图标-->
         <item name="selector_choice_box_icon">@drawable/selector_media_icon</item>
         <!--单选框 图标-->
         <item name="selector_radio_box_icon">@drawable/selector_original_icon</item>
         <!--媒体文件封面阴影颜色,根据select不同显示 图像或颜色-->
         <item name="selector_choice_shade_color">@drawable/selector_choice_shade_color</item>>
-        <!--头部标题下拉上拉文件夹 图标-->
-        <item name="selector_arrows_down_up_icon">@drawable/selector_arrows_down_up</item>
         <!-- 媒体文件封面视频标记 图标-->
         <item name="selector_video_icon">@drawable/ic_selector_video</item>
         <!--媒体文件封面gif标记 图标-->
@@ -274,6 +288,12 @@ start()
         <!--状态栏  背景颜色；图标颜色类型(白色或黑色) 仅在5.0以上生效-->
         <item name="selector_status_background">@color/selector_status_background</item>
         <item name="selector_status_icon_color_type">white</item>
+        <!--是否显示清除并退出按钮，默认显示-->
+        <item name="selector_media_cancel_visibility">VISIBLE</item>
+        <!--清除并退出文本-->
+        <item name="selector_media_cancel_text">@string/button_clear_default</item>
+        <!--是否显示详细信息按钮，默认显示-->
+        <item name="selector_media_details_info_visibility">VISIBLE</item>
         <!--页面背景色  引用或颜色-->
         <item name="selector_background">@color/selector_background</item>
         <!--标题栏 背景色  引用或颜色-->
@@ -286,6 +306,8 @@ start()
         <item name="selector_bottom_height">wrap_content</item>
         <!--选中字体颜色  引用或颜色-->
         <item name="selector_select_text_color">@color/selector_select_text_color</item>
+        <!--选中字体文本-->
+        <item name="selector_select_text">@string/button_sure_default</item>
         <!--dialog 样式  引用-->
         <item name="selector_dialog_style">@style/custom_dialog</item>
         <!--授权存储权限弹窗布局,里面必须有4个TextView id分别 为tv_title、tv_content、tv_confirm、tv_cancel-->
@@ -295,8 +317,8 @@ start()
 
         <!--设备无资源时，显示图片、提示文字文本、颜色、字体大小-->
         <item name="selector_empty_icon">@drawable/ic_empty_icon</item>
-        <item name="selector_empty_color">@color/selector_empty_color</item>
         <item name="selector_empty_text">@string/selector_empty_text</item>
+        <item name="selector_empty_color">@color/selector_empty_color</item>
         <item name="selector_empty_text_size">@dimen/selector_empty_text_size</item>
     </style>
     
