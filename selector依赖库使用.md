@@ -4,10 +4,21 @@ selector依赖库
 ## 1、版本描述（请star支持）
 
 ### 后续开发优化计划
-    1.预览界面可以拖动已选列表项，更换图片选中位置
-    2.预览界面长按弹出详情弹窗
+    1.预览界面可以拖动已选列表项，更换图片选中位置(已实现)
+    2.预览界面长按弹出详情弹窗(已实现)
     3.当只选择一张图片的时候，提供裁剪功能(图片放大、旋转，裁剪框比例)
-    4.(bug)标题设置了ellipsize,文字从 多-->少-->多 会出现省略号
+    4.(bug)标题设置了ellipsize,文字从 多-->少-->多 会出现省略号(已解决)
+    5.视频选择可限制大小、时长
+    6.支持同时选择图片、视频
+    
+  ### 1.0.0-beta4 特性
+ * attr自定义主题属性增加selector_select_text、selector_media_cancel_visibility、selector_media_cancel_text、selector_media_cancel_text
+ 、selector_media_details_info_visibility等属性，具体用法请看后面
+ * 界面UI布局优化，清除并退出按钮可根据attr值显示隐藏、更换文本，预览界面底部增加详细信息按钮，可用于查看媒体详情，可根据attr值隐藏
+ * 预览界面已选列表项支持长按拖拽更换位置、支持侧滑删除选中项(PS:可设置.previewSelectMediaSwipeDelete(true)方法开启、关闭侧滑删除功能)
+ * (bug解决)标题设置了ellipsize,文字从 多-->少-->多 会出现省略号
+ * (bug解决)预览界面控件显示隐藏功能优化
+ * (bug解决)媒体选择页面的文件夹选择弹窗位置、高度问题优化
     
  ### 1.0.0-beta3 特性
  * theme主题的selector_title_bottom_background属性拆分为selector_title_background、selector_bottom_background，增加selector_title_height
@@ -48,7 +59,14 @@ dependencies {
      
      //新的图片选择器依赖库,只需要依赖谷歌support库，无需依赖其他库，另外根据你选择的图片加载方式引用图片加载库(默认glide)
      //内部引用了jiaozivideoplayer用于视频播放
-     implementation 'com.cjf.selector:selector:1.0.0-beta3'
+     implementation 'com.android.support:appcompat-v7:28.0.0'
+     implementation 'com.android.support:recyclerview-v7:28.0.0'
+     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+     implementation 'com.cjf.selector:selector:1.0.0-beta4'
+     
+     //可选图片加载库
+     implementation 'com.github.bumptech.glide:glide:4.10.0'
+     implementation 'com.squareup.picasso:picasso:2.71828'
 
      
      //如果你升级到androidx，请使用下面依赖
@@ -69,14 +87,15 @@ dependencies {
 使用示例
 MediaAction.from(Activity activity)
                     .choose(new MimeType(MimeType.GetType.IMAGE))//选择媒体文件类型
-                    .capture(true) //是否显示拍照功能
+                    .capture(true) //是否显示拍照功能,默认false
                     .themeId(R.style.MySelectorTheme) //允许设置主题，默认主题R.style.selectorTheme 具体属性请看下面代码
                     .providerName(".FileProvider") //7.0以上版本拍照用到provider，默认.FileProvider
-                    .countable(true)//是否显示自动添加的数字或者复选标记
-                    .spanCount(4)//一行显示几张图
+                    .previewSelectMediaSwipeDelete(true) //预览界面，选中项是否支持上下侧滑删除，默认false
+                    .countable(true)//是否显示自动添加的数字或者复选标记,即是否多选，默认false
+                    .spanCount(4)//一行显示几张图,默认4
                     .imageEngine(new GlideEngine())//使用哪种图片加载器,并在gradle中implementation对应库，默认Glide
-                    .maxSelectable(8)//最多可选择的数
-                    .originalEnable(false)//是否显示原图单选框
+                    .maxSelectable(8)//最多可选择的数,默认1
+                    .originalEnable(false)//是否显示原图单选框，默认false
                     .setOnSelectChangeListener() //媒体文件选中状态改变监听
                     .setOnSelectedListener(new OnSelectedListener() { //媒体文件选中监听,也可以在onActivityResult中接收
                         @Override
@@ -103,7 +122,8 @@ MediaAction.from(Activity activity)
     //可传入application的context
     MediaAction.from(Context context)
                     .choose(new MimeType(MimeType.GetType.IMAGE))//选择媒体文件类型
-                    .setOnSelectedListener(new OnSelectedListener() { //媒体文件选中监听,也可以在onActivityResult中接收
+                    .setSelectMediaPaths(list)//传入选中文件路径集合
+                    .setOnSelectedListener(new OnSelectedListener() { //媒体文件选中监听
                         @Override
                         public void onSelected(@NonNull List<Uri> uriList, @NonNull List<String> pathList) {
                             list.clear();
@@ -135,8 +155,12 @@ SelectionCreator choose(MimeType mimeType)
 SelectionCreator类方法讲解
 //如果只选择图像或视频作为媒体，是否只显示一种媒体类型。(暂无用)
 showSingleMediaType(boolean showSingleMediaType)
+设置selector 选择器的主题
+themeId(@StyleRes int themeStyleId)
 7.0以上版本可能要用到FileProvider
 providerName(String providerName)
+预览界面，选中项是否支持上下侧滑删除
+previewSelectMediaSwipeDelete(boolean previewSelectMediaSwipeDelete)
 //是否显示自动添加的数字或者复选标记
 countable(boolean countable)
 //最多可选择的数
@@ -149,8 +173,6 @@ capture(boolean enable)
 originalEnable(boolean enable)
 //最大原始大小，单位为MB，不可选择超过该大小的多媒体文件，使用原图情况下生效
 maxOriginalSize(int size)
-设置selector 选择器的主题
-themeId(@StyleRes int themeStyleId)
 //设置此活动的预期方向(暂无用)
 restrictOrientation(@ScreenOrientation int orientation)
 //一行显示几张图
