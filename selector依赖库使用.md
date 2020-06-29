@@ -54,7 +54,7 @@ dependencies {
      //添加依赖
      //基本功能依赖库
      implementation 'com.github.Ghostbullets:hykjBase:1.5.47'
-     //图片选择器，需配套使用hykjBase
+     //图片选择器，需配套使用hykjBase(不再维护)
      implementation 'com.base.selector:selector:1.0.0'
      
      //新的图片选择器依赖库,只需要依赖谷歌support库，无需依赖其他库，另外根据你选择的图片加载方式引用图片加载库(默认glide)
@@ -72,11 +72,20 @@ dependencies {
      //如果你升级到androidx，请使用下面依赖
      //基本功能依赖库
      implementation 'com.Ghostbullets.base:base-androidx:0.1.2'
-     //图片选择器，需配套base-androidx使用
+     //图片选择器，需配套base-androidx使用(不再维护)
      implementation 'com.base.selector:selector-androidx1.0.1'
      
       //新的图片选择器依赖库,只需要依赖谷歌androidx库，无需依赖其他库
-      (待转换为androidx发布)
+      //内部引用了jiaozivideoplayer用于视频播放
+     implementation 'androidx.appcompat:appcompat:1.1.0'
+     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+     implementation 'com.cjf.selector:selector-androidx:1.0.0-beta'
+     
+     //可选图片加载库
+     implementation 'com.github.bumptech.glide:glide:4.10.0'
+     implementation 'com.squareup.picasso:picasso:2.71828'
+      
     ···
 }
 ```
