@@ -28,6 +28,9 @@ dependencies {
      //WebView独立进程解决方案
      //参考https://github.com/xudjx/webprogress
      implementation 'com.cjf.ipc:ipc:1.0.0'     
+     
+     //如果你升级到androidx，请使用下面依赖
+     implementation 'com.cjf.ipc:ipc-androidx:1.0.0'
 }
 ```
 
