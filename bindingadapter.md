@@ -26,7 +26,10 @@ dependencies {
     ···
      //添加依赖
      //适合mvvm 框架使用的listview、recyclerview、viewpager适配器
-     implementation 'com.cjf.bindingadapter:bindingadapter:1.0.0'
+     implementation 'com.cjf.bindingadapter:bindingadapter:1.0.4'
+     
+     //如果你升级到androidx，请使用下面依赖
+     implementation 'com.cjf.bindingadapter:bindingadapter-androidx:1.0.0'
     ···
 }
 ```
