@@ -57,6 +57,8 @@ dependencies {
       //基于MVVM框架的网络库(待后续完善)
      implementation "com.cjf.network:network:0.1.5"
 
+     //多级树形结构列表库
+     implementation "com.cjf.tree:tree:1.0.0-beta"
 
      //--------------------如果你升级到androidx，请使用下面依赖-------------------------
      
@@ -91,6 +93,8 @@ dependencies {
       //基于MVVM框架的网络库(待后续完善)
      implementation "com.cjf.network:network-androidx:0.1.0"
 
+     //多级树形结构列表库
+     implementation "com.cjf.tree:tree-androidx:1.0.0-beta"
 }
 ```
 
