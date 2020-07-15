@@ -8,9 +8,9 @@
   <packaging>aar</packaging>
   <dependencies>
     <dependency>
-      <groupId>kotlindemo</groupId>
+      <groupId>com.cjf.bindingadapter</groupId>
       <artifactId>bindingadapter</artifactId>
-      <version>unspecified</version>
+      <version>1.0.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
