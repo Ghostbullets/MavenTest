@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.cjf.tree</groupId>
+  <artifactId>tree-androidx</artifactId>
+  <versioning>
+    <release>1.0.0-beta</release>
+    <versions>
+      <version>1.0.0-beta</version>
+    </versions>
+    <lastUpdated>20200715021136</lastUpdated>
+  </versioning>
+</metadata>
