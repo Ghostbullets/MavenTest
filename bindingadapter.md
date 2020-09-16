@@ -1,4 +1,4 @@
-# MavenTest
+﻿# MavenTest
 bindingadapter依赖库，参考 https://github.com/evant/binding-collection-adapter
 
 ## 1、演示（请star支持）
@@ -26,10 +26,10 @@ dependencies {
     ···
      //添加依赖
      //适合mvvm 框架使用的listview、recyclerview、viewpager适配器
-     implementation 'com.cjf.bindingadapter:bindingadapter:1.0.4'
+     implementation 'com.cjf.bindingadapter:bindingadapter:1.1.0'
      
      //如果你升级到androidx，请使用下面依赖
-     implementation 'com.cjf.bindingadapter:bindingadapter-androidx:1.0.0'
+     implementation 'com.cjf.bindingadapter:bindingadapter-androidx:1.1.0'
     ···
 }
 ```

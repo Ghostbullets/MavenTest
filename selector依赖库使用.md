@@ -1,4 +1,4 @@
-# MavenTest
+﻿# MavenTest
 selector依赖库
 
 ## 1、版本描述（请star支持）
@@ -52,7 +52,7 @@ allprojects {
 dependencies {
     ···
      //添加依赖
-     //基本功能依赖库
+     //基本功能依赖库(不再维护)
      implementation 'com.github.Ghostbullets:hykjBase:1.5.47'
      //图片选择器，需配套使用hykjBase(不再维护)
      implementation 'com.base.selector:selector:1.0.0'
@@ -70,7 +70,7 @@ dependencies {
 
      
      //如果你升级到androidx，请使用下面依赖
-     //基本功能依赖库
+     //基本功能依赖库(不再维护)
      implementation 'com.Ghostbullets.base:base-androidx:0.1.2'
      //图片选择器，需配套base-androidx使用(不再维护)
      implementation 'com.base.selector:selector-androidx1.0.1'

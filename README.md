@@ -1,4 +1,4 @@
-# MavenTest
+﻿# MavenTest
 集成了图片选择、滚轮、基本模块等等仓库
 
 ## 1、演示（请star支持）
@@ -27,10 +27,10 @@ allprojects {
 dependencies {
     ···
      //添加依赖
-     //基本功能依赖库
+     //基本功能依赖库(不再维护)
      implementation 'com.github.Ghostbullets:hykjBase:1.5.47'
      
-      //图片选择器，需配套 基本功能依赖库hykjBase 使用
+      //图片选择器，需配套 基本功能依赖库hykjBase 使用(不再维护)
      implementation 'com.base.selector:selector:1.0.0'
      
      //新的图片选择器，只需要谷歌support库支持，另外根据你选择的图片加载方式引用图片加载库(默认glide)
@@ -49,13 +49,13 @@ dependencies {
      
      //适合mvvm 框架使用的listview、recyclerview、viewpager适配器
      //参考https://github.com/evant/binding-collection-adapter
-     implementation 'com.cjf.bindingadapter:bindingadapter:1.0.4'
+     implementation 'com.cjf.bindingadapter:bindingadapter:1.1.0'
      
      //基于MVVM框架的基础库(待后续完善)(PS:默认api了下面的网络库)
-     implementation "com.cjf.base:base:0.1.5"
+     implementation "com.cjf.base:base:0.1.19"
      
       //基于MVVM框架的网络库(待后续完善)
-     implementation "com.cjf.network:network:0.1.5"
+     implementation "com.cjf.network:network:0.1.15"
 
      //多级树形结构列表库
      implementation "com.cjf.tree:tree:1.0.0-beta"
@@ -63,10 +63,10 @@ dependencies {
      //--------------------如果你升级到androidx，请使用下面依赖-------------------------
      
      
-      //基本功能依赖库
+      //基本功能依赖库(不再维护)
      implementation 'com.Ghostbullets.base:base-androidx:0.1.2'
 
-     //图片选择器，需配套  基本功能依赖库base-androidx  使用
+     //图片选择器，需配套  基本功能依赖库base-androidx  使用(不再维护)
      implementation 'com.base.selector:selector-androidx1.0.1'
      
      //新的图片选择器，只需要谷歌androidx库支持，另外根据你选择的图片加载方式引用图片加载库(默认glide)
@@ -85,13 +85,13 @@ dependencies {
      
      //适合mvvm 框架使用的listview、recyclerview、viewpager适配器
      //参考https://github.com/evant/binding-collection-adapter
-     implementation 'com.cjf.bindingadapter:bindingadapter-androidx:1.0.0'
+     implementation 'com.cjf.bindingadapter:bindingadapter-androidx:1.1.0'
      
      //基于MVVM框架的基础库(待后续完善)(PS:默认api了下面的网络库)
-     implementation "com.cjf.base:base-androidx:0.1.0"
+     implementation "com.cjf.base:base-androidx:0.1.9"
      
       //基于MVVM框架的网络库(待后续完善)
-     implementation "com.cjf.network:network-androidx:0.1.0"
+     implementation "com.cjf.network:network-androidx:0.1.6"
 
      //多级树形结构列表库
      implementation "com.cjf.tree:tree-androidx:1.0.0-beta"
